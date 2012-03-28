@@ -15,7 +15,7 @@
   (sql/with-connection (System/getenv "DATABASE_URL")
     (sql/with-query-results results
       ["select * from images order by random() limit 1"]
-      (first (into [] results))))
+      (first (into [] results)))))
 
 ; (defn find-by-id [id]
 ;   (sql/with-connection (System/getenv "DATABASE_URL")
