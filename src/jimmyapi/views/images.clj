@@ -31,7 +31,7 @@
 (defn index [images]
   (layout/layout "Jimmy API"
                  [:h1 "Listing Images"]
-                 (images-table)))
+                 (images-table images)))
 
 (defn show [image]
   (layout/layout "Jimmy API"
