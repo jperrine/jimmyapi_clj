@@ -5,18 +5,14 @@
 
 (defn layout-head [title]
   [:head
-   [:title title]
-   (utils/include-less "/css/lib/bootstrap.less")
-   (utils/include-js "/js/less-1.2.0.min.js")
-   (utils/inline-css "body { padding-top: 60px; }")])
+    [:meta {:charset "utf-8"}]
+    [:meta {:http-equiv "X-UA-Compatible" :content "IE=edge,chrome=1"}]
+    [:meta {:name "viewport" :content "width=device-width, initial-scale=1, maximum-scale=1"}]
+    [:title title]
+    (include-css "/stylesheets/scaffold.css")])
 
-(defn layout [title body]
+(defn layout [title & body]
   (html
     (layout-head title)
     [:body
-     [:div.container body]
-     [:footer.footer
-      [:div.container
-       [:p.pull-right
-        [:a {:href "#"} "Back to top"]]
-       [:p "Built with Twitter Bootstrap"]]]]))
+     [:div.container body]]))

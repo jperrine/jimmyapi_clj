@@ -14,14 +14,24 @@
 (defn display-image [image]
   [:a {:href "/"} [:img {:src (image :url)}]])
 
-(defn display-images [images]
-  [:div {:id "images"}
-    (map #'display-image images)])
+(defn image-row [image]
+  [:tr
+    [:td (:url image)]
+    [:td (:uses image)]
+    [:td [:a {:href (str "/images/" (:id image))} "Show"]]])
+
+(defn images-table [images]
+  [:table
+    [:tr
+      [:th "Url"]
+      [:th "Uses"]
+      [:th]]
+    (map #'image-row images)])
 
 (defn index [images]
   (layout/layout "Jimmy API"
-                 (display-images)
-                 [:div {:class "clear"}]))
+                 [:h1 "Listing Images"]
+                 (images-table)))
 
 (defn show [image]
   (layout/layout "Jimmy API"
