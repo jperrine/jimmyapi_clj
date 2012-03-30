@@ -11,7 +11,7 @@
   (sql/with-connection (System/getenv "DATABASE_URL")
     (sql/insert-values :images (keys image) (vals image))))
 
-(defn jimmyapi.models.image/random []
+(defn random []
   (sql/with-connection (System/getenv "DATABASE_URL")
     (sql/with-query-results results
       ["select * from images order by random() limit 1"]
@@ -22,3 +22,9 @@
     (sql/update-values :images
                        ["id = ?" (:id image)]
                        {:uses (+ (:uses image) 1)})))
+
+(defn find-by-id [id]
+  (sql/with-connection (System/getenv "DATABASE_URL")
+    (sql/with-query-results results
+      ["select * from images where id = ?" id]
+      (first (into [] results)))))
