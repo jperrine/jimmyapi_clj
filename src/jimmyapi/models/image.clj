@@ -28,3 +28,8 @@
     (sql/with-query-results results
       ["select * from images where id = ?" id]
       (first (into [] results)))))
+
+(defn destroy [id]
+  (sql/with-connection (System/getenv "DATABASE_URL")
+    (sql/with-query-results results
+      ["delete from images where id = ?" id])))

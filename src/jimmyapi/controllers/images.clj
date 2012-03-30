@@ -18,14 +18,23 @@
   (ring/redirect "/"))
 
 (defn show [id]
-  (view/show (model/find-by-id id)))
+  (let [image (model/find-by-id id)]
+    (model/add-usage image)
+    (view/show image)))
 
 (defn random []
-  (view/show (model/random)))
+  (let [image (model/random)]
+    (model/add-usage image)
+    (view/show image)))
+
+(defn destroy [id]
+  (model/destroy id)
+  (ring/redirect "/images"))
 
 (defroutes routes
   (GET  "/" [] (random))
   (GET  "/images" [] (index))
   (GET  "/images/new" [] (new-image))
   (POST "/images" {params :params} (create params))
-  (GET  "/images/:id" [id] (show id)))
+  (GET  "/images/:id" [id] (show id))
+  (POST "/images/:id/destroy" [id] (destroy id)))
