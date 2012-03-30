@@ -8,8 +8,8 @@
 (defn index []
   (view/index (model/all)))
 
-(defn new []
-  (view/new))
+(defn new-image []
+  (view/new-image))
 
 (defn create [params]
   (let [image (:image params)]
@@ -24,8 +24,8 @@
   (view/show (model/random)))
 
 (defroutes routes
-  (GET "/" [] (random))
+  (GET  "/" [] (random))
   (GET  "/images" [] (index))
-  (GET  "/images/new" [] (new))
+  (GET  "/images/new" [] (new-image))
   (POST "/images" {params :params} (create params))
   (GET  "/images/:id" [id] (show id)))

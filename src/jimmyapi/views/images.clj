@@ -7,12 +7,12 @@
 (defn image-form []
   [:div {:id "image-form" :class ""}
     (form-to [:post "/images"]
-             (label "url" "Url")
-             (text-field "url")
+             (label "image[url]" "Url")
+             (text-field "image[url]")
              (submit-button "Save"))])
 
 (defn display-image [image]
-  [:a {:href "/random"} [:img {:src (image :url)}]])
+  [:a {:href "/"} [:img {:src (image :url)}]])
 
 (defn display-images [images]
   [:div {:id "images"}
@@ -27,5 +27,5 @@
   (layout/layout "Jimmy API"
                  (display-image image)))
 
-(defn new []
+(defn new-image []
   (layout/layout "Jimmy API" (image-form)))
